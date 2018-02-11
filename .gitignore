@@ -1,0 +1,4 @@
+*.pyc
+.dropbox
+.DS_Store
+_site
