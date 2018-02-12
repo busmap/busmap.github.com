@@ -71,7 +71,7 @@ def get_routes_by_nearby_stops(
         for route_id in stops[stop_id]['route_ids']:
             if route_id in route_ids:
                 continue
-            routte_ids.add(route_id)
+            route_ids.add(route_id)
             nearby_route_id_stop_ids.add((route_id, stop_id))
 
     return [
