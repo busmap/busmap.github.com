@@ -46,12 +46,6 @@ for route in routes.values():
         stops[stop_id]['route_ids'].append(route['tag'])
 
 
-def get_predictions_by_stop_ids(stop_ids):
-    stop_id_str = '&'.join(['stops=' + stop_id for stop_id in stop_ids])
-    url = PREDICTIONS_URL.format(stop_ids=stop_id_str)
-    return requests.get(url).json()
-
-
 def get_routes_by_nearby_stops(
     lat_min,
     lng_min,
