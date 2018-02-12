@@ -182,11 +182,13 @@ function filterStopsByRouteDirection(route, routeDirectionId) {
         }
     }
     var filteredStops = [];
-    for (var k = 0; k < route.stop.length; ++k) {
-        var stop = route.stop[k];
-        if (stopTags.includes(stop.tag)) {
-            filteredStops.push(stop);
-        }
+    if (route.stop) {
+        for (var k = 0; k < route.stop.length; ++k) {
+            var stop = route.stop[k];
+            if (stopTags.includes(stop.tag)) {
+                filteredStops.push(stop);
+            }
+        }    
     }
     return filteredStops;
 }
