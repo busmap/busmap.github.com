@@ -37,7 +37,7 @@ def get_route_tile(x, y, z):
         mercantile.Tile(x, y, z)
     )
     print 'Bounds {} {} {} {}'.format(west, south, east, north)
-    routes = nextbus.get_routes_by_nearby_stops_box(
+    routes = nextbus.get_routes_by_nearby_stops(
         east, south, east, north
     )
     return {'routes': [
