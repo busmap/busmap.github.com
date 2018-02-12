@@ -64,9 +64,14 @@ def get_routes_by_nearby_stops(
     nearby_stops = sorted(stops.values(), key=stop_dist)[:8]
     nearby_stop_ids = [stop['tag'] for stop in nearby_stops]
 
+    route_ids = set()
     nearby_route_id_stop_ids = set()
+
     for stop_id in nearby_stop_ids:
         for route_id in stops[stop_id]['route_ids']:
+            if route_id in route_ids:
+                continue
+            routte_ids.add(route_id)
             nearby_route_id_stop_ids.add((route_id, stop_id))
 
     return [
