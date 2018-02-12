@@ -87,7 +87,7 @@ function saveHash(selectedStopId) {
     
 }
 function getRouteVehicleUrl(route, vehicleId, lat, lng, zoom) {
-    var url = 'http://' +window.location.host + '/route.html';
+    var url = 'http://' + window.location.host + '/route.html';
     url += '?routeId=' + route.route;
     url += '&routeDirectionId=' + route.routeDirection;
     if (vehicleId) {
