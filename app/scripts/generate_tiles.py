@@ -2,7 +2,7 @@ import os
 import shutil
 import json
 
-# import requests
+import requests
 import shapely.geometry
 import mercantile
 
@@ -91,7 +91,6 @@ agency_url = (
 print('Requesting {}'.format(agency_url))
 response = requests.get(agency_url)
 route_config_payload = response.json()
-
 
 bounds = get_bounds(route_config_payload)
 print 'Bounds {}'.format(bounds)
