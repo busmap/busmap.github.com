@@ -63,7 +63,7 @@ def get_route_tile(x, y, z):
 def process_route_tiles(path, tile_coordinates):
     if os.path.exists(path):
         print 'Wiping directory {}'.format(path)
-        # shutil.rmtree(path)
+        shutil.rmtree(path)
 
     for tile_coordinate in tile_coordinates:
         x, y, z = tile_coordinate.x, tile_coordinate.y, tile_coordinate.z
@@ -71,9 +71,7 @@ def process_route_tiles(path, tile_coordinates):
             x=x, y=y, z=z
         )
         payload = json.dumps(get_route_tile(x, y, z))
-        # print 'Payload for {x},{y},{z}: {payload}'.format(
-        #     x=x, y=y, z=z, payload=payload
-        # )
+
         y_path = '{path}/{z}/{x}'.format(path=path, z=z, x=x)
         if not os.path.exists(y_path):
             print 'Creating directory {}'.format(y_path)
@@ -85,17 +83,15 @@ def process_route_tiles(path, tile_coordinates):
 
 
 agency = 'sf-muni'
-# agency_url = (
-#     'http://webservices.nextbus.com/service/publicJSONFeed'
-#     '?command=routeConfig'
-#     '&a=sf-muni'
-# )
-# print('Requesting {}'.format(agency_url))
-# response = requests.get(agency_url)
-# route_config_payload = response.json()
-route_config_payload = json.load(
-    open('/Users/glen/Dropbox/Code/busmap.io/app/scripts/sf-muni.json')
+agency_url = (
+    'http://webservices.nextbus.com/service/publicJSONFeed'
+    '?command=routeConfig'
+    '&a={agency}'.format(agency)
 )
+print('Requesting {}'.format(agency_url))
+response = requests.get(agency_url)
+route_config_payload = response.json()
+
 
 bounds = get_bounds(route_config_payload)
 print 'Bounds {}'.format(bounds)
@@ -103,5 +99,5 @@ print 'Bounds {}'.format(bounds)
 tile_coordinates = get_tile_coordinates(bounds, zoom=16)
 print 'Tile coordinates {}'.format(tile_coordinates)
 
-path = '/Users/glen/Dropbox/Code/busmap.io/app/static/tiles/{agency}'.format(agency=agency)
+path = 'static/tiles/{agency}'.format(agency=agency)
 process_route_tiles(path, tile_coordinates)
