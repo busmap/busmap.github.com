@@ -86,7 +86,7 @@ agency = 'sf-muni'
 agency_url = (
     'http://webservices.nextbus.com/service/publicJSONFeed'
     '?command=routeConfig'
-    '&a={agency}'.format(agency)
+    '&a={agency}'.format(agency=agency)
 )
 print('Requesting {}'.format(agency_url))
 response = requests.get(agency_url)
