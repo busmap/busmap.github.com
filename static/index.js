@@ -87,3 +87,23 @@ function reloader() {
     }
 }
 setInterval(reloader, 10000);
+
+
+function updateUserLocation(location) {
+    console.log('location loaded', location);
+    var latlng = [location.coords.latitude, location.coords.longitude];
+    if (!window.userLocationMarker) {
+        window.userLocationMarker = L.circleMarker(latlng, window.userLocationStyle);
+        window.userLocationMarker.bindPopup('Your location');
+        window.userLocationMarker.addTo(map);
+    }
+    else {
+        window.userLocationMarker.setLatLng(latlng);
+    }
+    map.fire('userLocationLoaded', {location: location});
+}
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(updateUserLocation, function () {
+        console.log('Could not load geolocation');
+    });
+}

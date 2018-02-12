@@ -283,20 +283,6 @@ map.on('routeLoaded', function (data) {
     routeLayer.addTo(map);
 });
 
-function updateUserLocation(location) {
-    console.log('location loaded', location);
-    var latlng = [location.coords.latitude, location.coords.longitude];
-    if (!window.userLocationMarker) {
-        window.userLocationMarker = L.circleMarker(latlng, window.userLocationStyle);
-        window.userLocationMarker.bindPopup('Your location');
-        window.userLocationMarker.addTo(map);
-    }
-    else {
-        window.userLocationMarker.setLatLng(latlng);
-    }
-    map.fire('userLocationLoaded', {location: location});
-}
-
 if(window.center && window.zoom) {
     map.setView(window.center, window.zoom);
 } else {
@@ -305,10 +291,4 @@ if(window.center && window.zoom) {
 
 if (window.location.hash) {
     loadHash();
-}
-
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(updateUserLocation, function () {
-        console.log('Could not load geolocation');
-    });
 }
