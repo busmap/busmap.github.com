@@ -234,28 +234,29 @@ function loadVehicles(routeId, routeDirectionId) {
     loadUrl(url, function (response) {
         var out = [];
         // filter by direction, and calculate distance to center
-        for(var i = 0; i < response.vehicle.length; ++i) {
-            var vehicle = response.vehicle[i];
-            if (vehicle.routeTag != routeId) {
-                continue;
-            }
-            if (vehicle.dirTag != routeDirectionId) {
-                continue;
-            }
-            var vehicleLatLng = L.latLng([
-                parseFloat(vehicle.lat),
-                parseFloat(vehicle.lon)
-            ]);
+        if (response.vehicle) {
+            for(var i = 0; i < response.vehicle.length; ++i) {
+                var vehicle = response.vehicle[i];
+                if (vehicle.routeTag != routeId) {
+                    continue;
+                }
+                if (vehicle.dirTag != routeDirectionId) {
+                    continue;
+                }
+                var vehicleLatLng = L.latLng([
+                    parseFloat(vehicle.lat),
+                    parseFloat(vehicle.lon)
+                ]);
 
-            out.push({
-                id: vehicle.id,
-                lat: vehicleLatLng.lat,
-                lng: vehicleLatLng.lng,
-                same_direction: vehicle.dirTag == routeDirectionId,
-                distance: vehicleLatLng.distanceTo(center)
-            })
+                out.push({
+                    id: vehicle.id,
+                    lat: vehicleLatLng.lat,
+                    lng: vehicleLatLng.lng,
+                    same_direction: vehicle.dirTag == routeDirectionId,
+                    distance: vehicleLatLng.distanceTo(center)
+                })
+            }
         }
-
         map.fire('vehiclesLoaded', {vehicles: out});
     })
 }
