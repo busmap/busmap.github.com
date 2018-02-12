@@ -162,10 +162,12 @@ function getDirection(routeResponse) {
 }
 function filterStopsByRouteDirection(route, routeDirectionId) {
     var direction = [];
-    for (var i = 0; i < route.direction.length; ++i) {
-        var currentDirection = route.direction[i];
-        if (currentDirection.tag == routeDirectionId) {
-            direction.push(currentDirection);
+    if (route.direction) {
+        for (var i = 0; i < route.direction.length; ++i) {
+            var currentDirection = route.direction[i];
+            if (currentDirection.tag == routeDirectionId) {
+                direction.push(currentDirection);
+            }
         }
     }
     if (direction.length == 0) {
