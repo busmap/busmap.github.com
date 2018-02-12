@@ -64,7 +64,6 @@ map.on('routeClicked', function (data) {
         map.getCenter().lng,
         map.getZoom()
     );
-    window.location.protocol = 'http:';
     window.location.href = url;
 });
 loadRoutes(map.getCenter().lat, map.getCenter().lng);
